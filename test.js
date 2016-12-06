@@ -17,7 +17,7 @@ var config = {
             'comment': ['delete'],
         },
     },
-    'callback': function (user, ope, res) {
+    callback: function (user, ope, res) {
         if (user.name === 'John' && ope === 'do') {
             return true;
         } else {
