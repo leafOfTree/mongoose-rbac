@@ -6,3 +6,6 @@ Role based access control for mongoose, simple to use
 
 ## install
 > npm install simple-mongoose-rbac --save-dev
+```bash
+npm install simple-mongoose-rbac --save-dev
+
