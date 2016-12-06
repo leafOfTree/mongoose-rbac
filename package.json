@@ -1,14 +1,14 @@
 {
-  "name": "mongoose-rbac",
+  "name": "simple-mongoose-rbac",
   "version": "0.0.1",
-  "description": "Role based access control for node and mongoose connected to mongo",
+  "description": "Role based access control for mongoose",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leafOfTree/mongoose-rbac.git"
+    "url": "git+https://github.com/leafOfTree/simple-mongoose-rbac.git"
   },
   "keywords": [
     "mongoose",
@@ -17,9 +17,9 @@
   "author": "leafOfTree",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/leafOfTree/mongoose-rbac/issues"
+    "url": "https://github.com/leafOfTree/simple-mongoose-rbac/issues"
   },
-  "homepage": "https://github.com/leafOfTree/mongoose-rbac#readme",
+  "homepage": "https://github.com/leafOfTree/simple-mongoose-rbac#readme",
   "dependencies": {
     "mongoose": "~3.8.8"
   }
