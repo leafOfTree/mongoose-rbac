@@ -6,6 +6,7 @@ rbac.init = function (config) {
     rbac.config = config;
 };
 
+// attach to mongoose's UserSchema
 rbac.attach = function (UserSchema) {
     var config = this.config;
 
@@ -13,25 +14,26 @@ rbac.attach = function (UserSchema) {
         roles: [ String ],
     });
 
-    UserSchema.methods.can = function (ope, res) {
+    UserSchema.methods.can = function (operate, resource) {
         var roles = this.roles,
             allows,
-            canDo = false;
+            _can = false;
 
         // check  grants
         roles.forEach(function (role) {
-            var allows = config.grants[role][res];
-            if (allows && allows.indexOf(ope) > -1) {
-                canDo = true;
+            allows = config.grants[role][resource];
+
+            if (allows && allows.indexOf(operate) > -1) {
+                _can = true;
             }
         });
 
         // check customs callback func
-        if (!canDo) {
-            canDo = config.callbacks(this, ope, res)
+        if (!_can) {
+            _can = config.callback(this, operate, resource);
         }
 
-        return canDo;
+        return _can;
     };
 };
 

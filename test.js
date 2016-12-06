@@ -5,10 +5,10 @@ var rbac = require('./index.js'),
 
 
 var config = {
-    roles: ['user', 'admin'],
-    permissions: {
-        'comment': ['add', 'delete']
-    },
+    //roles: ['user', 'admin'],
+    //permissions: {
+        //'comment': ['add', 'delete']
+    // },
     grants: {
         'user': {
             'comment': ['add'],
@@ -17,36 +17,39 @@ var config = {
             'comment': ['delete'],
         },
     },
-    callbacks: function (user, ope, res) {
-        if (user.name === 'John' && ope === 'does') {
-            return true
+    'callback': function (user, ope, res) {
+        if (user.name === 'John' && ope === 'do') {
+            return true;
         } else {
-            return false
+            return false;
         }
     }
-}
+};
 
-rbac.init(config)
+rbac.init(config);
 
-var UserSchema = new mongoose.Schema({ name: String })
+var UserSchema = new mongoose.Schema({ name: String });
 
-rbac.attach(UserSchema)
+rbac.attach(UserSchema);
 
-var User = mongoose.model('User', UserSchema)
+var User = mongoose.model('User', UserSchema);
 
 var John = new User({ name: 'John', roles: ['user'] }),
     Oliver = new User({ name: 'Oliver', roles: ['admin'] }),
-    O = new User({ name: 'Oliver', roles: ['admin', 'user'] })
+    Ohi = new User({ name: 'Oliver', roles: ['admin', 'user'] });
 
-var a, b, c, d
-a = John.can('add', 'comment')
-b = John.can('delete', 'comment')
-c = Oliver.can('add', 'comment')
-d = Oliver.can('delete', 'comment')
-//console.log(a === true)
-//console.log(b === false)
-//console.log(c === false)
-//console.log(d === true)
-//console.log(O.can('add', 'comment') === true)
-//console.log(O.can('delete', 'comment') === true)
-console.log(John.can('do', 'sth'))
+var expects = [
+    John.can('add', 'comment')  === true,
+    John.can('delete', 'comment')  === false,
+    Oliver.can('add', 'comment')  === false,
+    Oliver.can('delete', 'comment')  === true,
+    Ohi.can('add', 'comment')  === true,
+    Ohi.can('delete', 'comment')  === true,
+    John.can('do', 'sths')  === true,
+];
+
+expects.forEach(function (res, i) {
+    if (!res) {
+        console.log('The ' + i + ' th test result failed.');
+    }
+});
