@@ -1,14 +1,12 @@
 'use strict';
 
-var rbac = require('./index.js'),
-    mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    rbac = require('./index.js');
 
+var UserSchema = new mongoose.Schema({ name: String });
 
+// usage of rbac
 var config = {
-    //roles: ['user', 'admin'],
-    //permissions: {
-        //'comment': ['add', 'delete']
-    // },
     grants: {
         'user': {
             'comment': ['add'],
@@ -28,28 +26,32 @@ var config = {
 
 rbac.init(config);
 
-var UserSchema = new mongoose.Schema({ name: String });
-
 rbac.attach(UserSchema);
+// end
 
 var User = mongoose.model('User', UserSchema);
 
 var John = new User({ name: 'John', roles: ['user'] }),
     Oliver = new User({ name: 'Oliver', roles: ['admin'] }),
-    Ohi = new User({ name: 'Oliver', roles: ['admin', 'user'] });
+    Lee = new User({ name: 'Lee', roles: ['admin', 'user'] });
 
 var expects = [
     John.can('add', 'comment')  === true,
     John.can('delete', 'comment')  === false,
     Oliver.can('add', 'comment')  === false,
     Oliver.can('delete', 'comment')  === true,
-    Ohi.can('add', 'comment')  === true,
-    Ohi.can('delete', 'comment')  === true,
+    Lee.can('add', 'comment')  === true,
+    Lee.can('delete', 'comment')  === true,
     John.can('do', 'sths')  === true,
-];
+], passed = true;
 
 expects.forEach(function (res, i) {
     if (!res) {
         console.log('The ' + i + ' th test result failed.');
+        passed = false;
     }
 });
+
+if (passed) {
+    console.log('Test passed.');
+}
