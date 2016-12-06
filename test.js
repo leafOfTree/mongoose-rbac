@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new mongoose.Schema({ name: String });
 
-// usage of rbac
+// usage of rbac: just config and init
 var config = {
     grants: {
         'user': {
@@ -21,12 +21,11 @@ var config = {
         } else {
             return false;
         }
-    }
+    },
+    schema: UserSchema, 
 };
 
 rbac.init(config);
-
-rbac.attach(UserSchema);
 // end
 
 var User = mongoose.model('User', UserSchema);

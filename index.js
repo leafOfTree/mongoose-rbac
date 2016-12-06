@@ -4,6 +4,7 @@ var rbac = {};
 
 rbac.init = function (config) {
     rbac.config = config;
+    rbac.attach(config.schema);
 };
 
 // attach to mongoose's UserSchema
