@@ -1,5 +1,3 @@
-'use strict';
-
 var mongoose = require('mongoose'),
     rbac = require('./index.js');
 
@@ -15,14 +13,14 @@ var config = {
             'comment': ['delete'],
         },
     },
-    callback: function (user, ope, res) {
-        if (user.name === 'John' && ope === 'do') {
+    callback: function (user, operate, resource) {
+        if (user.name === 'John' && operate === 'do') {
             return true;
         } else {
             return false;
         }
     },
-    schema: UserSchema, 
+    schema: UserSchema,
 };
 
 rbac.init(config);
@@ -41,11 +39,11 @@ var expects = [
     Oliver.can('delete', 'comment')  === true,
     Lee.can('add', 'comment')  === true,
     Lee.can('delete', 'comment')  === true,
-    John.can('do', 'sths')  === true,
+    John.can('do', 'sth')  === true,
 ], passed = true;
 
-expects.forEach(function (res, i) {
-    if (!res) {
+expects.forEach(function (expect, i) {
+    if (!expect) {
         console.log('The ' + i + ' th test result failed.');
         passed = false;
     }

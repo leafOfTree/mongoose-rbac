@@ -1,5 +1,3 @@
-'use strict';
-
 var rbac = {};
 
 rbac.init = function (config) {
