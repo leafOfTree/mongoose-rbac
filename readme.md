@@ -1,5 +1,5 @@
 # simple-mongoose-rbac
-Role based access control for mongoose, simple to use
+Role based access control for mongoose, a simple user authority manager solution.
 
 ## require
 > "mongoose": "~3.8.8"
@@ -19,7 +19,6 @@ var mongoose = require('mongoose'),
 var UserSchema = new mongoose.Schema({ name: String });
 
 // usage of rbac: just init with config
-
 rbac.init({
     grants: {
         'user': {
