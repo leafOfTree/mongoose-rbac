@@ -1,6 +1,8 @@
 # simple-mongoose-rbac
 Role based access control for mongoose, a simple user authority manager solution.
 
+[![Build Status](https://travis-ci.org/leafOfTree/simple-mongoose-rbac.svg?branch=master)](https://travis-ci.org/leafOfTree/simple-mongoose-rbac)
+
 ## require
 > "mongoose": "~3.8.8"
 
