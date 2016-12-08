@@ -18,8 +18,9 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new mongoose.Schema({ name: String });
 
-// usage of rbac: just config and init
-var config = {
+// usage of rbac: just init with config
+
+rbac.init({
     grants: {
         'user': {
             'comment': ['add'],
@@ -36,9 +37,7 @@ var config = {
         }
     },
     schema: UserSchema, 
-};
-
-rbac.init(config);
+});
 // end
 
 var User = mongoose.model('User', UserSchema);
